@@ -2,6 +2,7 @@ package com.techelevator.view;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -97,4 +98,18 @@ public class MenuTest {
 	private Menu getMenuForTesting() {
 		return getMenuForTestingWithUserInput("1" + System.lineSeparator());
 	}
+
+	@Test
+	public void getSlotsTest() {
+		Menu testMenu = new Menu(System.in, System.out);
+
+		List<VendingMachineSlot> testSlots = testMenu.getSlots();
+
+		Assert.assertEquals("A1" , testSlots.get(0).getSlotNumber());
+	}
+
+
+
 }
+
+

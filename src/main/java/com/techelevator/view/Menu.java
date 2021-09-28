@@ -1,8 +1,8 @@
 package com.techelevator.view;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -10,9 +10,28 @@ public class Menu {
 	private PrintWriter out;
 	private Scanner in;
 
+	private File vendingMachineList;
+
 	public Menu(InputStream input, OutputStream output) {
 		this.out = new PrintWriter(output);
 		this.in = new Scanner(input);
+		this.vendingMachineList = new File("vendingmachine.csv");
+	}
+
+	public List<VendingMachineSlot> getSlots() {
+		List<VendingMachineSlot> slotList = new ArrayList<>();
+		try (Scanner fileScanner = new Scanner(vendingMachineList)) {
+			while (fileScanner.hasNext()) {
+				String currentItem = fileScanner.nextLine();
+				String[] itemEntry = currentItem.split("\\|");
+				ItemClass newItem = new ItemClass(itemEntry[1], Double.parseDouble(itemEntry[2]), itemEntry[itemEntry.length - 1]);
+				VendingMachineSlot newSlot = new VendingMachineSlot(newItem, itemEntry[0]);
+				slotList.add(newSlot);
+//				System.out.println(currentItem);
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found.");
+		} return slotList;
 	}
 
 	public Object getChoiceFromOptions(Object[] options) {
