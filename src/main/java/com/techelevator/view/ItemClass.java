@@ -15,7 +15,7 @@ public class ItemClass {
 
     @Override
     public String toString () {
-        return getName() + " $" + getPrice();
+        return getName() + " | $" + getPrice();
     }
 
 

@@ -16,9 +16,9 @@ public class VendingMachineSlot {
     @Override
     public String toString() {
         if(amountRemaining == 0) {
-            return "SOLD OUT";
+            return "| " + this.slotNumber + " | " + this.item.toString() + " | SOLD OUT |";
         } else {
-            return this.slotNumber + " " + this.item.toString();
+            return "| " + this.slotNumber + " | " + this.item.toString() + " | " + this.amountRemaining + " |";
         }
     }
 

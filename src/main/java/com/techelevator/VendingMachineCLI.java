@@ -29,7 +29,11 @@ public class VendingMachineCLI {
 
 	private Menu menu;
 
-	private double credit = 0;
+	public double credit = 0;
+
+	public VendingMachineCLI() {
+
+	}
 
 	public double getCredit() {
 		return credit;
@@ -78,7 +82,7 @@ public class VendingMachineCLI {
 		cli.run();
 	}
 
-	private int[] makeChange() {
+	public int[] makeChange() {
 		//remaining credit
 		int change = (int) (credit * 100);
 		int quarters = (int) (change / 25);
@@ -164,11 +168,12 @@ public class VendingMachineCLI {
 			}
 			if (selectedSlot == null) {
 				System.out.println("Slot not found. Enter new slot.");
+				System.out.println();
 				continue;
 			}
 			//checking for enough money
 			if (this.credit >= selectedSlot.getItem().getPrice()) {
-				credit -= selectedSlot.getItem().getPrice();
+//				credit -= selectedSlot.getItem().getPrice();
 
 				if (selectedSlot.getAmountRemaining() > 0) {
 					selectedSlot.setAmountRemaining(selectedSlot.getAmountRemaining() - 1);
@@ -183,6 +188,7 @@ public class VendingMachineCLI {
 					} else if (selectedItemType.equals("Gum")) {
 						System.out.println("Chew Chew, Yum!");
 					}
+					credit -= selectedSlot.getItem().getPrice();
 					VendingMachineLog.log(" | " + selectedSlot.getItem().getName() + " " + selectedSlot.getSlotNumber() + " | $" + logCredit + " | $" + credit + " |");
 					break;
 

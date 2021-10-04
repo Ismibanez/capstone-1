@@ -12,6 +12,6 @@ public class VendingMachineSlotTest {
         testSlot.setAmountRemaining(0);
 
         String testSlotAsString = testSlot.toString();
-        assertEquals("SOLD OUT", testSlotAsString);
+        assertEquals("| " + testSlot.getSlotNumber() + " | " + testSlot.getItem() + " | SOLD OUT |", testSlotAsString);
     }
 }
